@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>建設公司發包管理系統</title>
+    <meta name="description" content="專業的建設公司發包管理系統，提供專案管理、預算控制、詢價採購、進度追蹤等完整功能" />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #f1f5f9 70%, #fefce8 100%);
+        min-height: 100vh;
+      }
+
+      .demo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 2rem;
+        color: #334155;
+        text-align: center;
+      }
+
+      .logo {
+        width: 120px;
+        height: 120px;
+        background: linear-gradient(135deg, #3b82f6 0%, #1e40af 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 32px rgba(59, 130, 246, 0.2);
+        border: 2px solid rgba(59, 130, 246, 0.1);
+      }
+
+      .title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #1e3a8a;
+        letter-spacing: -0.025em;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 3rem;
+        color: #64748b;
+        max-width: 600px;
+        line-height: 1.6;
+        font-weight: 400;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin-bottom: 3rem;
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        border-color: #3b82f6;
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        filter: grayscale(20%);
+      }
+
+      .feature-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #334155;
+      }
+
+      .feature-desc {
+        color: #64748b;
+        line-height: 1.5;
+        font-weight: 400;
+      }
+
+      .api-info {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        max-width: 600px;
+        margin-bottom: 2rem;
+        backdrop-filter: blur(10px);
+      }
+
+      .api-info h3 {
+        color: #334155;
+        margin-top: 0;
+      }
+
+      .api-info p {
+        color: #64748b;
+      }
+
+      .api-link {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        border-bottom: 2px solid transparent;
+        transition: border-color 0.2s ease;
+      }
+
+      .api-link:hover {
+        border-bottom-color: #3b82f6;
+      }
+
+      .status-badge {
+        display: inline-block;
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-top: 1rem;
+        box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+      }
+
+      .tech-item {
+        background: rgba(255, 255, 255, 0.7);
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        color: #64748b;
+        border: 1px solid rgba(226, 232, 240, 0.5);
+        transition: all 0.2s ease;
+      }
+
+      .tech-item:hover {
+        background: rgba(255, 255, 255, 0.9);
+        border-color: #3b82f6;
+        color: #334155;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-container">
+      <div class="logo">🏗️</div>
+
+      <h1 class="title">建設公司發包管理系統</h1>
+      <p class="subtitle">
+        現代化的企業級發包管理解決方案，整合專案管理、預算控制、智能報價比較、進度追蹤等核心功能，
+        助力建設公司提升管理效率和決策品質。
+      </p>
+
+      <div class="features">
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <div class="feature-title">專案與預算管理</div>
+          <div class="feature-desc">自動建立預算表，支援審核流程，預算超支智能警示</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📋</div>
+          <div class="feature-title">詢價單生成</div>
+          <div class="feature-desc">根據工程圖自動生成詢價單，支援版本管理和批量發送</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <div class="feature-title">智能報價比較</div>
+          <div class="feature-desc">自動整理廠商報價，AI 分析預測價格趨勢，生成決策報告</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🛒</div>
+          <div class="feature-title">採購單管理</div>
+          <div class="feature-desc">自動扣除預算，追蹤交期，延遲預警系統</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+          <div class="feature-title">進度追蹤系統</div>
+          <div class="feature-desc">即時監控實際 vs 預期進度，提供解決方案建議</div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔔</div>
+          <div class="feature-title">即時通知系統</div>
+          <div class="feature-desc">WebSocket 即時推播，多渠道通知整合</div>
+        </div>
+      </div>
+
+      <div class="api-info">
+        <h3>🔗 API 文件</h3>
+        <p>後端 API 已完成建置，您可以透過以下連結查看完整的 API 文件：</p>
+        <a href="/api-docs" class="api-link" target="_blank">查看 Swagger API 文件</a>
+        <div class="status-badge">✅ 後端系統已就緒</div>
+      </div>
+
+      <div class="tech-stack">
+        <div class="tech-item">Vue 3</div>
+        <div class="tech-item">TypeScript</div>
+        <div class="tech-item">NestJS</div>
+        <div class="tech-item">PostgreSQL</div>
+        <div class="tech-item">Redis</div>
+        <div class="tech-item">Element Plus</div>
+        <div class="tech-item">AG Grid</div>
+        <div class="tech-item">WebSocket</div>
+      </div>
+    </div>
+  </body>
+</html>

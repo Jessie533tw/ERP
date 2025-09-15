@@ -1,0 +1,61 @@
+{
+  "name": "construction-erp",
+  "services": [
+    {
+      "name": "backend",
+      "type": "nodejs",
+      "source": "./backend",
+      "build": {
+        "commands": [
+          "npm ci",
+          "npm run build"
+        ]
+      },
+      "start": "npm run start:prod",
+      "environment": {
+        "NODE_ENV": "production",
+        "PORT": "3000"
+      },
+      "env": [
+        "DATABASE_HOST",
+        "DATABASE_PORT",
+        "DATABASE_USERNAME",
+        "DATABASE_PASSWORD",
+        "DATABASE_NAME",
+        "REDIS_HOST",
+        "REDIS_PORT",
+        "JWT_SECRET",
+        "CORS_ORIGIN"
+      ],
+      "domains": ["api.construction-erp.zeabur.app"],
+      "health_check": "/health"
+    },
+    {
+      "name": "frontend",
+      "type": "static",
+      "source": "./frontend",
+      "build": {
+        "commands": [
+          "npm ci",
+          "npm run build"
+        ],
+        "output": "dist"
+      },
+      "environment": {
+        "VITE_API_URL": "https://api.construction-erp.zeabur.app/api",
+        "VITE_WS_URL": "wss://api.construction-erp.zeabur.app"
+      },
+      "domains": ["construction-erp.zeabur.app"]
+    },
+    {
+      "name": "database",
+      "type": "postgresql",
+      "version": "15"
+    },
+    {
+      "name": "redis",
+      "type": "redis",
+      "version": "7"
+    }
+  ]
+}
