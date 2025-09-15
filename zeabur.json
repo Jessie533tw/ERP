@@ -1,61 +1,88 @@
 {
-  "name": "construction-erp",
+  "$schema": "https://schema.zeabur.com/template.json",
+  "name": "Construction ERP Management System",
+  "description": "Professional construction company procurement management system with Vue 3 + NestJS",
+  "tags": ["erp", "construction", "management", "vue", "nestjs"],
   "services": [
     {
-      "name": "backend",
-      "type": "nodejs",
-      "source": "./backend",
-      "build": {
-        "commands": [
-          "npm ci",
-          "npm run build"
-        ]
-      },
-      "start": "npm run start:prod",
-      "environment": {
-        "NODE_ENV": "production",
-        "PORT": "3000"
-      },
-      "env": [
-        "DATABASE_HOST",
-        "DATABASE_PORT",
-        "DATABASE_USERNAME",
-        "DATABASE_PASSWORD",
-        "DATABASE_NAME",
-        "REDIS_HOST",
-        "REDIS_PORT",
-        "JWT_SECRET",
-        "CORS_ORIGIN"
-      ],
-      "domains": ["api.construction-erp.zeabur.app"],
-      "health_check": "/health"
-    },
-    {
-      "name": "frontend",
-      "type": "static",
-      "source": "./frontend",
-      "build": {
-        "commands": [
-          "npm ci",
-          "npm run build"
-        ],
-        "output": "dist"
-      },
-      "environment": {
-        "VITE_API_URL": "https://api.construction-erp.zeabur.app/api",
-        "VITE_WS_URL": "wss://api.construction-erp.zeabur.app"
-      },
-      "domains": ["construction-erp.zeabur.app"]
-    },
-    {
       "name": "database",
-      "type": "postgresql",
-      "version": "15"
+      "icon": "🗄️",
+      "template": "POSTGRESQL",
+      "variables": {
+        "POSTGRES_DB": "construction_erp",
+        "POSTGRES_USER": "erp_user",
+        "POSTGRES_PASSWORD": {
+          "default": "erp_password_2024"
+        }
+      }
     },
     {
       "name": "redis",
-      "type": "redis",
-      "version": "7"
+      "icon": "🔄",
+      "template": "REDIS"
+    },
+    {
+      "name": "backend",
+      "icon": "🔧",
+      "template": "NODEJS",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/Jessie533tw/ERP",
+        "branch": "main"
+      },
+      "build": {
+        "buildCommand": "cd backend && npm ci && npm run build",
+        "outputDirectory": "backend/dist"
+      },
+      "start": "cd backend && npm run start:prod",
+      "variables": {
+        "NODE_ENV": "production",
+        "PORT": "3000",
+        "DATABASE_HOST": "${database.connectionString.host}",
+        "DATABASE_PORT": "${database.connectionString.port}",
+        "DATABASE_USERNAME": "${database.connectionString.username}",
+        "DATABASE_PASSWORD": "${database.connectionString.password}",
+        "DATABASE_NAME": "${database.POSTGRES_DB}",
+        "REDIS_HOST": "${redis.connectionString.host}",
+        "REDIS_PORT": "${redis.connectionString.port}",
+        "JWT_SECRET": {
+          "default": "construction-erp-jwt-secret-2024-change-in-production"
+        },
+        "JWT_EXPIRES_IN": "24h",
+        "CORS_ORIGIN": "https://${frontend.domain}",
+        "ENCRYPTION_KEY": {
+          "default": "construction-erp-encryption-key-32"
+        },
+        "AUDIT_ENABLED": "true",
+        "AUDIT_RETENTION_DAYS": "365",
+        "MAX_FILE_SIZE": "10485760",
+        "UPLOAD_PATH": "./uploads"
+      },
+      "ports": [
+        {
+          "id": "api",
+          "port": 3000,
+          "type": "HTTP"
+        }
+      ]
+    },
+    {
+      "name": "frontend",
+      "icon": "🌐",
+      "template": "STATIC",
+      "source": {
+        "type": "git",
+        "url": "https://github.com/Jessie533tw/ERP",
+        "branch": "main"
+      },
+      "build": {
+        "buildCommand": "cd frontend && npm ci && npm run build",
+        "outputDirectory": "frontend/dist"
+      },
+      "variables": {
+        "VITE_API_URL": "https://${backend.domain}/api",
+        "VITE_WS_URL": "wss://${backend.domain}"
+      }
     }
   ]
 }
