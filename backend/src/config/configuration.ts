@@ -7,10 +7,10 @@ export default () => ({
     port: parseInt(process.env.DATABASE_PORT, 10) || 5432,
     username: process.env.DATABASE_USERNAME || 'erp_user',
     password: process.env.DATABASE_PASSWORD || 'erp_password',
-    database: process.env.DATABASE_NAME || 'construction_erp',
-    synchronize: process.env.NODE_ENV !== 'production',
+    database: process.env.DATABASE_NAME || 'erp',
+    synchronize: process.env.DATABASE_SYNCHRONIZE === 'true' || process.env.NODE_ENV !== 'production',
     logging: process.env.NODE_ENV === 'development',
-    ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+    ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
   },
 
   redis: {
