@@ -2,10 +2,10 @@
 -- 🤖 Generated with Claude Code
 
 -- 創建資料庫（如果不存在）
-CREATE DATABASE IF NOT EXISTS construction_erp;
+CREATE DATABASE IF NOT EXISTS erp;
 
 -- 連接到資料庫
-\c construction_erp;
+\c erp;
 
 -- 創建預設角色
 INSERT INTO roles (id, name, description, permissions, created_at, updated_at) VALUES
